@@ -13,9 +13,9 @@
         }
     ],
     "require": {
+        "php": "^8.1",
         "symfony/var-dumper": "*",
         "league/flysystem": "*",
-        "symfony/http-foundation": "*",
-        "illuminate/contracts": "^8.83"
+        "symfony/http-foundation": "*"
     }
 }
