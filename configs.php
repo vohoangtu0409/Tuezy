@@ -7,5 +7,8 @@ return [
         'DB_PASS'   => '',
         'DB_DATABASE'   => 'laravel',
         'DB_DRIVER' => 'mysql'
+    ],
+    'whiteList' => [
+        'index'
     ]
 ];

@@ -7,9 +7,7 @@ define('_GET', $_GET);
 define('_POST', $_POST);
 define('_REQUEST', $_REQUEST);
 
-$whiteList = [
-    'index'
-];
+$whiteList = config('whiteList');
 
 const INDEX_DOT_PHP = '/index.php';
 
