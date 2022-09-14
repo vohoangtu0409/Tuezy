@@ -1,6 +1,8 @@
 <?php
-
-function container(): Psr\Container\ContainerInterface{
+function compiled($str){
+    return preg_replace('/({+[^\/]+})/', '[a-zA-Z0-9]', $str);
+}
+function container(): \Illuminate\Container\Container{
     return \Illuminate\Container\Container::getInstance();
 }
 function repository(): \Illuminate\Config\Repository{

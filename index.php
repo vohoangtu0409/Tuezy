@@ -1,4 +1,9 @@
 <?php
 const ROOT = __DIR__ . DIRECTORY_SEPARATOR;
 require ROOT . 'bootstrap/bootstrap.php';
-require ROOT . 'database/setup.php';
+
+$route = new \Tuezy\Route();
+$route->handle();
+
+
+

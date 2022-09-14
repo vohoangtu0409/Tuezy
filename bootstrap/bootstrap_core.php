@@ -7,6 +7,10 @@ define('_GET', $_GET);
 define('_POST', $_POST);
 define('_REQUEST', $_REQUEST);
 
+$whiteList = [
+    'index'
+];
+
 const INDEX_DOT_PHP = '/index.php';
 
 $plain_request_uri = RAW_REQUEST_URI;
@@ -36,9 +40,26 @@ $explodedURI = explode('/', REQUEST_URI);
 if(REQUEST_URI === '/'){
     define('PREFIX', 'index');
 }else{
-    if($explodedURI[1]) define('PREFIX', $explodedURI[1]);
+    if($explodedURI[1] && in_array($explodedURI[1], $whiteList)) define('PREFIX', $explodedURI[1]);
+    else define('PREFIX', 'index');
 }
+
+
 
 if(config('debug')){
     dump('REQUEST_METHOD: '. REQUEST_METHOD, 'REQUEST_URI: '. REQUEST_URI, 'PREFIX: '. PREFIX);
+    dump(compiled(REQUEST_METHOD . '/' . PREFIX . REQUEST_URI));
 }
+
+
+
+$explodedURI = explode('/', REQUEST_URI);
+
+foreach ($explodedURI as $index => $uri){
+    if(!empty($uri) && !in_array($uri, $whiteList))
+        $explodedURI[$index] = '[a-zA-Z0-9]';
+}
+
+$userRequestURI = REQUEST_METHOD . '/' . PREFIX . implode('/', $explodedURI);
+
+container()->bind('hashURI', $userRequestURI);
