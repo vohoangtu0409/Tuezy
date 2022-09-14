@@ -1,7 +1,7 @@
 {
-    "name": "tuezy/koding",
+    "name": "tuezy/web",
     "autoload": {
-        "files": [ "src/functions.php" ],
+        "files": ["src/functions.php" ],
         "psr-4": {
             "Tuezy\\": "src"
         }
@@ -14,8 +14,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "symfony/var-dumper": "*",
-        "league/flysystem": "*",
-        "symfony/http-foundation": "*"
+        "tuezy/routing": "^0.0.1",
+        "illuminate/view": "^9.29",
+        "illuminate/database": "^9.29",
+        "illuminate/config": "^9.29",
+        "illuminate/http": "^9.29"
     }
 }
