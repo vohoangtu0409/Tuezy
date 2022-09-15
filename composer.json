@@ -13,9 +13,13 @@
         }
     ],
     "require": {
-        "illuminate/view": "*",
-        "illuminate/database": "*",
-        "illuminate/config": "*",
-        "illuminate/http": "*"
+        "laravel/framework": "^9.30"
+    },
+    "suggest": {
+        "ext-memcached": "Required to use the memcache cache driver.",
+        "illuminate/database": "Required to use the database cache driver (^9.0).",
+        "illuminate/filesystem": "Required to use the file cache driver (^9.0).",
+        "illuminate/redis": "Required to use the redis cache driver (^9.0).",
+        "symfony/cache": "Required to use PSR-6 cache bridge (^6.0)."
     }
 }

@@ -32,7 +32,7 @@ $_REQUEST = null;
 $_GET= null;
 $_POST = null;
 
-// ##################################################
+// ############## DEFINE PREFIX ####################################
 $explodedURI = explode('/', REQUEST_URI);
 
 if(REQUEST_URI === '/'){
@@ -49,15 +49,9 @@ if(config('debug')){
     dump(compiled(REQUEST_METHOD . '/' . PREFIX . REQUEST_URI));
 }
 
-
-
-$explodedURI = explode('/', REQUEST_URI);
-
 foreach ($explodedURI as $index => $uri){
     if(!empty($uri) && !in_array($uri, $whiteList))
         $explodedURI[$index] = '[a-zA-Z0-9]';
 }
 
-$userRequestURI = REQUEST_METHOD . '/' . PREFIX . implode('/', $explodedURI);
-
-container()->bind('hashURI', $userRequestURI);
+define('HASH_REQUEST', REQUEST_METHOD . '/' . PREFIX . implode('/', $explodedURI));

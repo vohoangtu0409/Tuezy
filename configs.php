@@ -8,6 +8,10 @@ return [
         'DB_DATABASE'   => 'laravel',
         'DB_DRIVER' => 'mysql'
     ],
+    'view' => [
+       'path'  => ROOT . 'resources/views',
+       'cache' => ROOT . 'cache/views'
+    ],
     'whiteList' => [
         'index'
     ]

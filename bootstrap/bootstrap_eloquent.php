@@ -1,14 +1,16 @@
 <?php
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Container\Container;
-$container = Container::getInstance();
-$capsule = new Capsule($container);
+
+use Tuezy\Helper\Config;
+$container = \Tuezy\App::getInstance();
+$capsule = new Capsule(Container::getInstance());
 $params = [
-    'host'      => config('database.DB_HOST'),
-    'username'  => config('database.DB_USER'),
-    'password'  => config('database.DB_PASS'),
-    'database'  => config('database.DB_DATABASE'),
-    'driver'    => config('database.DB_DRIVER'),
+    'host'      => Config::get('database.DB_HOST'),
+    'username'  => Config::get('database.DB_USER'),
+    'password'  => Config::get('database.DB_PASS'),
+    'database'  => Config::get('database.DB_DATABASE'),
+    'driver'    => Config::get('database.DB_DRIVER'),
     'charset'   => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',

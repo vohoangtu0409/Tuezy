@@ -10,26 +10,12 @@ use Illuminate\View\Engines\EngineResolver;
 use Illuminate\View\Engines\FileEngine;
 use Illuminate\View\Engines\PhpEngine;
 use Illuminate\View\FileViewFinder;
-
+use \Tuezy\Helper\Config;
 $viewPaths = ROOT . 'resources/views';
 $cachePath = ROOT . 'cache/views';
 
-$container = Container::getInstance();
+$container = \Tuezy\App::getInstance();
 
-$container->bindIf('files', function () {
-    return new Filesystem;
-}, true);
-
-$container->bindIf('events', function () {
-    return new Dispatcher;
-}, true);
-
-$container->bindIf('config', function () use ($viewPaths, $cachePath) {
-    return collect([
-                       'view.paths' => $viewPaths,
-                       'view.compiled' => $cachePath,
-                   ]);
-}, true);
 
 $container->singleton('view', function ($container) {
     // Next we need to grab the engine resolver instance that will be used by the
@@ -48,16 +34,16 @@ $container->singleton('view', function ($container) {
 
     $factory->share('app', $container);
 
-    $factory->addNamespace('default', $container['config']['view.paths']);
+    $factory->addNamespace('default', Config::get('view.path'));
 
     return $factory;
 });
 $container->bind('view.finder', function ($container) {
-    return new FileViewFinder($container['files'], [$container['config']['view.paths']]);
+    return new FileViewFinder($container['files'], [Config::get('view.path')]);
 });
 
 $container->singleton('blade.compiler', function ($container) {
-    return tap(new BladeCompiler($container['files'], $container['config']['view.compiled']), function ($blade) {
+    return tap(new BladeCompiler($container['files'], Config::get('view.cache')), function ($blade) {
         $blade->component('dynamic-component', DynamicComponent::class);
     });
 });
