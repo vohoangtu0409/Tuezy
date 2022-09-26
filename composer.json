@@ -1,7 +1,7 @@
 {
     "name": "tuezy/web",
     "autoload": {
-        "files": ["src/functions.php" ],
+        "files": ["functions.php" ],
         "psr-4": {
             "Tuezy\\": "src"
         }
@@ -13,13 +13,15 @@
         }
     ],
     "require": {
-        "laravel/framework": "^9.30"
+        "illuminate/collections": "v8.83.23",
+        "illuminate/database": "^8.83",
+        "illuminate/pipeline": "^8.83",
+        "illuminate/events": "^8.83",
+        "illuminate/view": "^8.83",
+        "illuminate/config": "^8.83",
+        "symfony/var-dumper": "^5.4"
     },
     "suggest": {
-        "ext-memcached": "Required to use the memcache cache driver.",
-        "illuminate/database": "Required to use the database cache driver (^9.0).",
-        "illuminate/filesystem": "Required to use the file cache driver (^9.0).",
-        "illuminate/redis": "Required to use the redis cache driver (^9.0).",
-        "symfony/cache": "Required to use PSR-6 cache bridge (^6.0)."
+
     }
 }

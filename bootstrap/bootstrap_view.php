@@ -14,8 +14,38 @@ use \Tuezy\Helper\Config;
 $viewPaths = ROOT . 'resources/views';
 $cachePath = ROOT . 'cache/views';
 
-$container = \Tuezy\App::getInstance();
+$container = Container::getInstance();
+$app = $container;
 
+$app->bindIf('files', function () {
+    return new Filesystem;
+}, true);
+
+$app->bindIf('events', function () {
+    return new Dispatcher;
+}, true);
+
+$app->singleton('cache', function () {
+    return new CacheManager(Container::getInstance());
+});
+
+$app->singleton('cache.store', function ($app) {
+    return $app['cache']->driver();
+});
+
+$app->singleton('cache.psr6', function ($app) {
+    return new Psr16Adapter($app['cache.store']);
+});
+
+$app->singleton('memcached.connector', function () {
+    return new MemcachedConnector;
+});
+
+$app->singleton(RateLimiter::class, function ($app) {
+    return new RateLimiter($app->make('cache')->driver(
+        $app['config']->get('cache.limiter')
+    ));
+});
 
 $container->singleton('view', function ($container) {
     // Next we need to grab the engine resolver instance that will be used by the

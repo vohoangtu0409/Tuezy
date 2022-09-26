@@ -1,8 +1,8 @@
 <?php
 
-namespace Tuezy\Helper;
+namespace Tuezy\Facades;
 
-use Tuezy\Helper\Services;
+use Tuezy\Facade;
 
 /**
  * @method static array all()
@@ -14,7 +14,7 @@ use Tuezy\Helper\Services;
  *
  * @see \Illuminate\Config\Repository
  */
-class Config extends Services
+class Config extends Facade
 {
     /**
      * Get the registered name of the component.

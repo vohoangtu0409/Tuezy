@@ -5,14 +5,11 @@ return [
         'DB_HOST'   => 'localhost',
         'DB_USER'   => 'root',
         'DB_PASS'   => '',
-        'DB_DATABASE'   => 'laravel',
+        'DB_DATABASE'   => 'test1',
         'DB_DRIVER' => 'mysql'
     ],
     'view' => [
        'path'  => ROOT . 'resources/views',
-       'cache' => ROOT . 'cache/views'
-    ],
-    'whiteList' => [
-        'index'
+       'cache' => ROOT . 'caches/views'
     ]
 ];

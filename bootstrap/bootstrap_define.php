@@ -1,45 +1,17 @@
 <?php
+$container = \Illuminate\Container\Container::getInstance();
 
-use Illuminate\Cache\CacheManager;
-use Illuminate\Cache\MemcachedConnector;
-use Illuminate\Cache\RateLimiter;
-use Illuminate\Container\Container;
-use Tuezy\Helper\Services;
-use Illuminate\Events\Dispatcher;
-use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Cache\Adapter\Psr16Adapter;
 
-$app = \Tuezy\App::getInstance();
 
-Services::setFacadeApplication(Container::getInstance());
+$container->instance('app', $container);
+$container->bind('app', \Illuminate\Container\Container::class);
+$container->alias('container', 'app');
+$container->alias(\Illuminate\Contracts\Container\Container::class, \Illuminate\Container\Container::class);
 
-$app->bindIf('files', function () {
-    return new Filesystem;
-}, true);
+$config = new \Illuminate\Config\Repository(include ROOT . 'configs.php');
 
-$app->bindIf('events', function () {
-    return new Dispatcher;
-}, true);
+$container->instance('config', $config);
+$container->bind('config', \Illuminate\Config\Repository::class);
+$container->alias(\Illuminate\Config\Repository::class, \Illuminate\Contracts\Config\Repository::class);
 
-$app->singleton('cache', function () {
-    return new CacheManager(\Tuezy\App::getInstance());
-});
-
-$app->singleton('cache.store', function ($app) {
-    return $app['cache']->driver();
-});
-
-$app->singleton('cache.psr6', function ($app) {
-    return new Psr16Adapter($app['cache.store']);
-});
-
-$app->singleton('memcached.connector', function () {
-    return new MemcachedConnector;
-});
-
-$app->singleton(RateLimiter::class, function ($app) {
-    return new RateLimiter($app->make('cache')->driver(
-        $app['config']->get('cache.limiter')
-    ));
-});
-
+\Tuezy\Facade::setFacadeApplication($container);
