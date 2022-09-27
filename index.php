@@ -2,18 +2,11 @@
 const ROOT = __DIR__ . DIRECTORY_SEPARATOR;
 require ROOT . 'vendor/autoload.php';
 
-foreach([
-            'bootstrap_define.php',
-            'bootstrap_view.php',
-            'bootstrap_eloquent.php',
-            'bootstrap_core.php',
-        ] as $bootstrapFiles){
+$ioc = \Tuezy\Container\IoC::getInstance();
 
-    include ROOT . 'bootstrap/'. $bootstrapFiles;
+$ioc->bind('test', 'Test 1');
 
-}
-
-$request = (new \Tuezy\Request());
-$request->capture();
-
-dump($request, $_REQUEST);
+$ioc->alias('test', 'Test 2');
+dump($ioc);
+unset($ioc['test']);
+dump($ioc);

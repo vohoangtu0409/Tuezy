@@ -13,13 +13,17 @@
         }
     ],
     "require": {
-        "illuminate/collections": "v8.83.23",
-        "illuminate/database": "^8.83",
-        "illuminate/pipeline": "^8.83",
-        "illuminate/events": "^8.83",
-        "illuminate/view": "^8.83",
-        "illuminate/config": "^8.83",
-        "symfony/var-dumper": "^5.4"
+        "ext-json": "*",
+        "psr/container": "*",
+        "illuminate/collections": "*",
+        "illuminate/container": "*",
+        "illuminate/contracts": "*",
+        "illuminate/events": "*",
+        "illuminate/filesystem": "*",
+        "illuminate/macroable": "*",
+        "illuminate/support": "*",
+        "illuminate/view": "*",
+        "symfony/var-dumper": "*"
     },
     "suggest": {
 
